@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zetty01234.zettyyun.vb.vbMapper">
+
+    <!-- VB 목록 선택 -->
+    <select id="selectVbList" resultType="com.zetty01234.zettyyun.vb.vbDTO">
+        SELECT
+            v_seq,
+            v_title,
+            v_link
+        FROM
+            vb
+    </select>
+
+
+
+    <!-- 썸네일 목록 선택 -->
+    <select id="selectThumb" parameterType="int" resultType="string">
+        SELECT
+            file_path
+        FROM
+            uploadfile
+        WHERE
+            o_table = 'vb'
+            AND o_seq = #{vSeq}
+    </select>
+
+    <!-- VB 등록 -->
+    <insert id="insertVb" parameterType="com.zetty01234.zettyyun.vb.vbDTO" useGeneratedKeys="true" keyProperty="vSeq">
+        INSERT INTO vb (
+            v_title,
+            v_content,
+            v_link
+        ) VALUES (
+            #{vTitle},
+            #{vContent},
+            #{vLink}
+        )
+    </insert>
+
+    <!-- 파일 업로드 -->
+    <insert id="insertFile" parameterType="com.zetty01234.zettyyun.file.fileDTO">
+        INSERT INTO uploadfile (
+            o_seq,
+            o_table,
+            original_filename,
+            save_filename,
+            file_path,
+            file_size
+        ) VALUES (
+            #{oSeq},
+            #{oTable},
+            #{originalFilename},
+            #{saveFilename},
+            #{filePath},
+            #{fileSize}
+        )
+    </insert>
+
+    <!-- 파일 업데이트 -->
+    <update id="updateFile" parameterType="com.zetty01234.zettyyun.file.fileDTO">
+        UPDATE uploadfile
+        SET original_filename = #{originalFilename},
+            save_filename = #{saveFilename},
+            file_path = #{filePath},
+            file_size = #{fileSize}
+        WHERE o_table = #{oTable}
+            AND o_seq = #{oSeq}
+    </update>
+
+
+    <!-- updateVTpath 업데이트 -->
+    <update id="updateVTpath" parameterType="map">
+        UPDATE vb
+        SET v_tpath = #{vTpath}
+        WHERE v_seq = #{vSeq}
+    </update>
+
+
+
+    <!-- 특정 VB 조회 -->
+    <select id="selectVb" parameterType="String" resultType="com.zetty01234.zettyyun.vb.vbDTO">
+        SELECT
+            v_seq,
+            v_title,
+            v_content,
+            v_link,
+            v_tpath
+        FROM
+            vb
+        WHERE
+            v_link = #{vLink}
+    </select>
+
+    <!-- 특정 VB 삭제 -->
+    <delete id="deleteVb" parameterType="String">
+        DELETE FROM
+            vb
+        WHERE
+            v_link = #{vLink}
+    </delete>
+
+    <!-- 특정 VB 업데이트 -->
+    <update id="updateVb" parameterType="com.zetty01234.zettyyun.vb.vbDTO">
+        UPDATE
+            vb
+        SET
+            v_title = #{vTitle},
+            v_content = #{vContent},
+            v_link = #{vLink}
+        WHERE
+            v_link = #{vLink}
+    </update>
+
+    <!-- 특정 파일 경로 선택 -->
+    <select id="selectFilePath" parameterType="map" resultType="String">
+        SELECT file_path
+        FROM uploadfile
+        WHERE o_table = #{oTable}
+            AND o_seq = #{oSeq}
+    </select>
+
+    <!-- VB 내 Thumb 삭제 -->
+    <delete id="deleteFile" parameterType="map">
+        DELETE FROM
+            uploadfile
+        WHERE
+            o_table = #{oTable}
+            AND o_seq = #{oSeq}
+    </delete>
+
+</mapper>

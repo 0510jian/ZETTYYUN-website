@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zetty01234.zettyyun.user.loginMapper">
+
+    <!-- user 선택 -->
+    <select id="selectUserByLogin" parameterType="map" resultType="com.zetty01234.zettyyun.user.userDTO">
+        SELECT
+            id,
+            pw,
+            manager
+        FROM user
+        WHERE id = #{id}
+        AND pw = #{pw}
+    </select>
+
+
+</mapper>

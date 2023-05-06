@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ZETTY YUN : contact</title>
+    <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+    <nav>
+        <a href="/">home</a> |
+        <a href="/vb">vb</a> |
+        <a href="/ust">ust</a> |
+        <a href="/blog">blog</a> |
+        <a href="/contact"style="color: #84b3e5;">contact</a> |
+        <a href="/login">❤</a>
+    </nav>
+
+    <hr>
+
+    <article>
+        <form id="c_contact" name="c_contact" action="/contact" method="post" onsubmit="return checkD()">
+
+            email<br><input type="email" name="email" maxlength="100"><br><br>
+            title<br><input type="text" name="title" maxlength="50" style="width: 488px;"><br><br>
+            message<br><textarea name="message" id="message" rows="15" cols="67" style="resize: none;"></textarea><br><br>
+            spam check : what is the name of default voicebank for utau?<br><input type="text" maxlength="50" id="check2"><br><br>
+            <div id="sending" style="color: #f54081; display: none;">
+                sending...<br><br>
+            </div>
+
+            <input type="hidden" name="input" id="input">
+
+            <input type="submit" value="input" onclick="checkD()"
+                   style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+        </form>
+
+    </article>
+
+
+</main>
+<footer>
+</footer>
+</body>
+</html>
+
+<script>
+    function sending() {
+        document.getElementById("sending").style.display = "block";
+    }
+
+    function checkD() {
+        var name = document.getElementById("check2").value;
+        if(name == "") {
+            sending();
+            document.getElementById("input").value = name;
+            return true;
+        }
+        else {
+            alert("hint : start D");
+            return false;
+        }
+    }
+</script>

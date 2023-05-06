@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ZETTY YUN : blog</title>
+  <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+  <!-- ckeditor -->
+  <script src="/static/ckeditor4/ckeditor.js"></script>
+
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+  <nav>
+    <a href="/">home</a> |
+    <a href="/vb">vb</a> |
+    <a href="/ust">ust</a> |
+    <a href="/blog" style="color: #84b3e5;">blog</a> |
+    <a href="/contact">contact</a> |
+    <a href="/login">❤</a>
+  </nav>
+
+  <hr>
+
+  <th:block th:unless="${res == null}">
+    <th:block th:if="${res.manager}">
+      <article style="width: 600px;">
+        <form id="v_insertBlog" action="/blog/write" method="post">
+          <table>
+            <tr style="margin-bottom:5px;">
+              <td>title </td>
+              <td><input type="text" name="bTitle" style="width: 520px;"></td>
+              <td><input type="checkbox" id="bHome" name="bHome" class="form-check-input"></td>
+            </tr>
+          </table>
+
+
+
+          <br><textarea name="bContent" id="ckeditor" rows="30" cols="30"></textarea><br>
+
+
+
+          <input type="submit" value="작성"
+                 style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+
+
+        </form>
+      </article>
+    </th:block>
+  </th:block>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>
+
+<script>
+       CKEDITOR.replace("ckeditor", {filebrowserImageUploadUrl: '/blog/uploadImage'});
+       CKEDITOR.config.extraPlugins = 'youtube';
+  </script>

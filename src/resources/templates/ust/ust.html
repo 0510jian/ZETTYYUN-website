@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ZETTY YUN : ust</title>
+    <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+    <nav>
+        <a href="/">home</a> |
+        <a href="/vb">vb</a> |
+        <a href="/ust" style="color: #84b3e5;">ust</a> |
+        <a href="/blog">blog</a> |
+        <a href="/contact">contact</a> |
+        <a href="/login">❤</a>
+    </nav>
+
+    <hr>
+
+    <article>
+        <th:block th:unless="${res == null}">
+            <th:block th:if="${res.manager}">
+                <form id="u_insertUst" action="/ust" method="post">
+                    <table>
+                        <tr>
+                            <td>title</td>
+                            <td><input type="text" name="uTitle" style="width: 400px;"></td>
+                        </tr>
+                        <tr>
+                            <td>composer</td>
+                            <td><input type="text" name="uComposer" style="width: 400px;"></td>
+                        </tr>
+                        <tr>
+                            <td>link</td>
+                            <td><input type="text" name="uLink" style="width: 400px;"></td>
+                        </tr>
+                    </table>
+                    <p style="text-align: right;">
+                        <input type="submit" value="add"
+                               style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+                    </p>
+                </form>
+            </th:block>
+        </th:block>
+
+        <p th:if="${#lists.size(ustList)} > 0" th:each="ust:${ustList}">
+            <a th:href="${ust.uLink}">
+                <span th:text="${ust.uTitle}"></span>
+                (<span th:text="${ust.uComposer}"></span>)
+
+                <th:block th:unless="${res == null}">
+                    <th:block th:if="${res.manager}">
+                        <a href="/ust/" th:attrappend="href=${ust.uSeq}" class="btn"
+                           style="background: #afafaf; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">del
+                        </a>
+                    </th:block>
+                </th:block>
+            </a>
+        </p>
+        <p th:unless="${#lists.size(ustList)} > 0">
+            <span>no UST data</span>
+        </p>
+
+    </article>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>

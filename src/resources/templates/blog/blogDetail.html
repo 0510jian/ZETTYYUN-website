@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ZETTY YUN : blog</title>
+  <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+  <nav>
+    <a href="/">home</a> |
+    <a href="/vb">vb</a> |
+    <a href="/ust">ust</a> |
+    <a href="/blog" style="color: #84b3e5;">blog</a> |
+    <a href="/contact">contact</a> |
+    <a href="/login">❤</a>
+  </nav>
+
+  <hr>
+
+  <article style="width: 600px;">
+
+    <!-- 제목, 내용, 날짜 -->
+    <p th:text="${dto.bTitle}" style="font-size: 20px; color: #84b3e5;"></p>
+    <hr style="width:600px;">
+    <p th:text="${dto.bDatetime}" style="text-align: right; font-size: 10px;"></p>
+    <p th:utext="${dto.bContent}"></p>
+
+
+
+
+    <th:block th:unless="${res == null}">
+      <th:block th:if="${res.manager}">
+        <!-- 수정, 삭제 버튼 -->
+        <table style="align: right;">
+          <tr>
+            <td>
+              <form action="/blog/modify/" th:attrappend="action=${dto.bSeq}" method="get">
+                <input type="submit" value="수정" class="btn"
+                       style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+              </form>
+            </td>
+            <td>
+              <form action="/blog/" th:attrappend="action=${dto.bSeq}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="삭제" class="btn"
+                       style="background: #afafaf; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+              </form>
+            </td>
+          </tr>
+        </table>
+      </th:block>
+    </th:block>
+
+  </article>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>

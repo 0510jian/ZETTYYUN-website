@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zetty01234.zettyyun.ust.ustMapper">
+
+    <!-- UST 목록 선택 -->
+    <select id="selectUstList" resultType="com.zetty01234.zettyyun.ust.ustDTO">
+        SELECT
+            u_seq,
+            u_title,
+            u_composer,
+            u_link
+        FROM
+            ust
+        ORDER BY u_title
+    </select>
+
+    <!-- UST 등록 -->
+    <insert id="insertUst" parameterType="com.zetty01234.zettyyun.ust.ustDTO">
+        INSERT INTO ust (
+            u_title,
+            u_composer,
+            u_link
+        ) VALUES (
+            #{uTitle},
+            #{uComposer},
+            #{uLink}
+        )
+    </insert>
+
+    <!-- UST 삭제 -->
+    <delete id="deleteUst" parameterType="int">
+        DELETE FROM
+            ust
+        WHERE
+            u_seq = #{uSeq}
+    </delete>
+</mapper>

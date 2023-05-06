@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ZETTY YUN : vb</title>
+    <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+    <nav>
+        <a href="/">home</a> |
+        <a href="/vb" style="color: #84b3e5;">vb</a> |
+        <a href="/ust">ust</a> |
+        <a href="/blog">blog</a> |
+        <a href="/contact">contact</a> |
+        <a href="/login">❤</a>    </nav>
+
+    <hr>
+
+    <article>
+        <th:block th:unless="${res == null}">
+            <th:block th:if="${res.manager}">
+                <p style="text-align: right;">
+                    <a href="/vb/write" class="btn"
+                       style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">add</a>
+                </p>
+            </th:block>
+        </th:block>
+
+        <span th:if="${#lists.size(vbList)} > 0" th:each="vb:${vbList}" style="margin:2px;">
+            <a href="/vb/" th:attrappend="href=${vb.vLink}">
+                <img th:src="${vb.vTpath}" style="width: 150px; height: 150px;">
+            </a>
+        </span>
+
+        <p th:unless="${#lists.size(vbList)} > 0">
+            <span>no VB data</span>
+        </p>
+    </article>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>

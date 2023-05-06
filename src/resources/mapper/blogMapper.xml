@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zetty01234.zettyyun.blog.blogMapper">
+
+    <!-- home 선택 -->
+    <select id="selectHome" resultType="com.zetty01234.zettyyun.blog.blogDTO">
+        SELECT
+            b_seq,
+            b_title,
+            b_content,
+            b_datetime,
+            b_home
+        FROM
+            blog
+        WHERE
+            b_home = 1
+        ORDER BY b_seq DESC
+        LIMIT 1
+    </select>
+
+    <!-- blog 목록 선택 -->
+    <select id="selectBlogList" resultType="com.zetty01234.zettyyun.blog.blogDTO">
+        SELECT
+            b_seq,
+            b_title,
+            b_content,
+            b_datetime,
+            b_home
+        FROM
+            blog
+        ORDER BY b_seq DESC
+    </select>
+
+    <!-- blog 작성 -->
+    <insert id="insertBlog" parameterType="com.zetty01234.zettyyun.blog.blogDTO">
+        INSERT INTO blog (
+            b_title,
+            b_content,
+            b_home
+        ) VALUES (
+            #{bTitle},
+            #{bContent},
+            #{bHome}
+        )
+    </insert>
+
+    <!-- 모든 home 해제 -->
+    <update id="updateHome">
+        UPDATE
+            blog
+        SET
+            b_home = 0
+    </update>
+
+    <!-- 블로그 글 조회 -->
+    <select id="selectBlog" parameterType="int" resultType="com.zetty01234.zettyyun.blog.blogDTO">
+        SELECT
+            b_seq,
+            b_title,
+            b_content,
+            b_datetime,
+            b_home
+        FROM
+            blog
+        WHERE
+            b_seq = #{bSeq}
+    </select>
+
+    <!-- 블로그 글 업데이트 -->
+    <update id="updateBlog" parameterType="com.zetty01234.zettyyun.blog.blogDTO">
+        UPDATE
+            blog
+        SET
+            b_title = #{bTitle},
+            b_content = #{bContent},
+            b_home = #{bHome}
+        WHERE
+            b_seq = #{bSeq}
+    </update>
+
+    <!-- 블로그 글 삭제 -->
+    <delete id="deleteBlog" parameterType="int">
+        DELETE FROM
+            blog
+        WHERE
+            b_seq = #{bSeq}
+    </delete>
+</mapper>

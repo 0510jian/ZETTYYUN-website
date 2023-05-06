@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ZETTY YUN : vb</title>
+  <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+  <!-- ckeditor -->
+  <script src="/static/ckeditor4/ckeditor.js"></script>
+
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+  <nav>
+    <a href="/">home</a> |
+    <a href="/vb" style="color: #84b3e5;">vb</a> |
+    <a href="/ust">ust</a> |
+    <a href="/blog">blog</a> |
+    <a href="/contact">contact</a> |
+    <a href="/login">❤</a>  </nav>
+
+  <hr>
+
+  <th:block th:unless="${res == null}">
+    <th:block th:if="${res.manager}">
+      <article style="width: 600px;">
+        <form id="v_insertVb" action="/vb/" th:attrappend="action=${dto.vLink}" method="post" enctype="multipart/form-data">
+          <table>
+            <tr style="margin-bottom:5px;">
+              <td>title </td>
+              <td><input type="text" name="vTitle" style="width: 540px;" th:value="${dto.vTitle}"></td>
+            </tr>
+            <tr style="margin-bottom:5px;">
+              <td>link </td>
+              <td><input type="text" name="vLink" style="width: 540px;" th:value="${dto.vLink}"></td>
+            </tr>
+            <tr style="margin-bottom:5px; background: white;">
+              <td>thumb </td>
+              <td><input type="file" name="uploadfile" style="width: 540px;"></td>
+            </tr>
+          </table>
+
+          <br><textarea name="vContent" id="ckeditor" th:utext="${dto.vContent}"></textarea><br>
+
+          <input type="hidden" name="_method" value="put">
+          <input type="submit" value="완료"
+                 style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+        </form>
+      </article>
+    </th:block>
+  </th:block>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>
+
+<script>
+       CKEDITOR.replace("ckeditor", {filebrowserImageUploadUrl: '/vb/uploadImage'});
+       CKEDITOR.config.extraPlugins = 'youtube';
+  </script>

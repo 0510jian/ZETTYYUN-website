@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ZETTY YUN : blog</title>
+    <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+    <nav>
+        <a href="/">home</a> |
+        <a href="/vb">vb</a> |
+        <a href="/ust">ust</a> |
+        <a href="/blog" style="color: #84b3e5;">blog</a> |
+        <a href="/contact">contact</a> |
+        <a href="/login">❤</a>
+    </nav>
+
+    <hr>
+
+    <article>
+        <!-- 작성 버튼 -->
+        <th:block th:unless="${res == null}">
+            <th:block th:if="${res.manager}">
+                <p style="text-align: right;">
+                    <a href="/blog/write" class="btn"
+                       style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">add</a>
+                </p>
+            </th:block>
+        </th:block>
+
+
+        <!-- 게시판 -->
+        <table style="border-top: 1px solid #dbdbdb; border-collapse: collapse; width:500px;">
+            <p th:if="${#lists.size(blogList)} > 0">
+                <thead>
+                    <tr style="border-bottom: 1px solid #dbdbdb; padding:5px;">
+                        <td style="width:30px;">no</td>
+                        <td>title</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="blogs, i:${blogList}" style="border-bottom: 1px solid #dbdbdb;">
+                        <td th:text="${i.index+1}" style="padding:5px;">
+                        </td>
+                        <td>
+                            <a href="/blog/" th:attrappend="href=${blogs.bSeq}" th:text="${blogs.bTitle}"/>
+                        </td>
+                    </tr>
+                </tbody>
+
+
+
+                <table>
+
+        </table>
+
+
+            </p>
+            <p th:unless="${#lists.size(blogList)} > 0">
+                <span>no BLOG data</span>
+            </p>
+
+        </table>
+    </article>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>

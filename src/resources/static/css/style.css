@@ -1,0 +1,90 @@
+@CHARSET "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
+html {
+	font-family: DotGothic16, Galmuri9;
+	background-color: #dcecf4;
+}
+
+body {
+    animation-name: up;
+    animation-duration: 1s;
+}
+
+@keyframes up {
+0% {opacity: 0; margin-top:30px;}
+100$ {opacity: 100; margin-top:0px;}
+}
+
+header, main, footer {
+    width: 700px;
+    margin: auto;
+}
+
+header {
+    height: 150px;
+    background: url('../img/header.png');
+}
+
+main {
+    background: url('../img/main.png');
+    background-repeat: repeat-y;
+    color: #282828;
+}
+
+footer {
+    height: 150px;
+    background: url('../img/footer3.png');
+}
+
+a {
+    text-decoration: none;
+    color: #f54081;
+    font-family: DotGothic16, Galmuri9;
+}
+
+nav {
+    margin-left: 15px;
+    margin-bottom: 5px;
+    color: #ffbec4;
+}
+
+article {
+    width:500px;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+input, textarea {
+border: 0 solid black;
+background: #ededed;
+border-radius: 5px;
+padding: 5px;
+font-family: DotGothic16, Galmuri9;
+}
+
+hr {
+margin: auto;
+width: 698px;
+border: 1px solid #ffbec4;
+}
+
+.btn1 {
+    background: #84b3e5;
+    color: white;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    border-radius: 5px;
+}
+
+.thumb {
+width: 400px;
+height: 400px;
+}

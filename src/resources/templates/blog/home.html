@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ZETTY YUN : home</title>
+    <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+    <nav>
+        <a href="/" style="color: #84b3e5;">home</a> |
+        <a href="/vb">vb</a> |
+        <a href="/ust">ust</a> |
+        <a href="/blog">blog</a> |
+        <a href="/contact">contact</a> |
+        <a href="/login">❤</a>
+    </nav>
+
+    <hr>
+
+    <article style="width: 600px;">
+        <p th:if="${#lists.size(dto)} > 0" th:each="dto:${dto}">
+            <span th:utext="${dto.bContent}"></span>
+        </p>
+        <p th:unless="${#lists.size(dto)} > 0">
+        </p>
+    </article>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>

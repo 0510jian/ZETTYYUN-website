@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ZETTY YUN : COSMOS</title>
+  <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
+
+</head>
+<body>
+<header>
+</header>
+
+<main>
+  <nav>
+    <a href="/">home</a> |
+    <a href="/vb" style="color: #84b3e5;">vb</a> |
+    <a href="/ust">ust</a> |
+    <a href="/blog">blog</a> |
+    <a href="/contact">contact</a> |
+    <a href="/login">❤</a>  </nav>
+
+  <hr>
+
+  <article style="width: 600px;">
+    <p th:utext="${dto.vContent}"></p>
+
+    <th:block th:unless="${res == null}">
+      <th:block th:if="${res.manager}">
+        <table style="text-align:right;">
+          <tr>
+            <td>
+              <form action="/vb/modify/" th:attrappend="action=${dto.vLink}" method="get">
+                <input type="submit" value="수정" class="btn"
+                       style="background: #84b3e5; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+              </form>
+            </td>
+            <td>
+              <form action="/vb/" th:attrappend="action=${dto.vLink}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="삭제" class="btn"
+                       style="background: #afafaf; color: white; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px;">
+              </form>
+            </td>
+          </tr>
+        </table>
+      </th:block>
+    </th:block>
+
+  </article>
+
+</main>
+<footer>
+</footer>
+</body>
+</html>
